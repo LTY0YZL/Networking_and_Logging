@@ -89,7 +89,7 @@ namespace Communications
         /// </summary>
         public bool IsWaitingForClients
         {
-            get { return _tcpListener != null; } 
+            get { return _tcpListener != null; }
         }
 
         /// <summary>
@@ -109,11 +109,12 @@ namespace Communications
         /// </summary>
         public string RemoteAddressPort
         {
-            get { 
-                if(_tcpClient != null && _tcpClient.Connected)
+            get
+            {
+                if (_tcpClient != null && _tcpClient.Connected)
                 {
                     _lastKnownRemoteEndPoint = _tcpClient.Client.RemoteEndPoint.ToString();
-                        return _tcpClient.Client.RemoteEndPoint.ToString();
+                    return _tcpClient.Client.RemoteEndPoint.ToString();
                 }
                 else if (_lastKnownRemoteEndPoint != null)
                 {
@@ -127,7 +128,7 @@ namespace Communications
                 {
                     return "Disconnected";
                 }
-            } 
+            }
         }
 
         /// <summary>
@@ -151,7 +152,7 @@ namespace Communications
                 if (_tcpClient != null && _tcpClient.Connected)
                 {
                     return _tcpClient.Client.RemoteEndPoint.ToString();
-                } 
+                }
                 else if (_lastKnownRemoteEndPoint != null)
                 {
                     return $"{_tcpClient.Client.RemoteEndPoint} - Disconnected";
@@ -198,7 +199,7 @@ namespace Communications
         /// </exception>
         public async Task ConnectAsync(string host, int port)
         {
-            if(_tcpClient !=null && _tcpClient.Connected)
+            if (_tcpClient != null && _tcpClient.Connected)
             {
                 _logger.LogInformation($"Already connected to {host}:{port}");
                 return;
@@ -211,7 +212,7 @@ namespace Communications
                 await _tcpClient.ConnectAsync(host, port);
                 _logger.LogInformation($"Connected to {host}:{port}");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _logger.LogError($"Failed to connect to {host}:{port}");
                 throw e;
@@ -232,7 +233,7 @@ namespace Communications
         /// </summary>
         public void Disconnect()
         {
-            if(_tcpClient != null)
+            if (_tcpClient != null)
             {
                 if (_tcpClient.Connected)
                 {
